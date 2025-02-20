@@ -6,16 +6,16 @@ import (
 	"net/http"
 	"os"
 
-	"go.tsmckee.com/cmd/models"
+	"goden.tsmckee.com/garden"
 )
 
 type Application struct {
 	logger *slog.Logger
-	Garden *models.Garden
+	Garden *garden.Garden
 }
 
 func main() {
-	g := models.CreateGarden()
+	g := garden.CreateGarden()
 
 	// TODO make content dir in config or something to search files in
 	// for now Im just going to hack in static
