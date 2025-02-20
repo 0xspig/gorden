@@ -21,3 +21,25 @@ It should be reverse proxied by your http server.
 
 # Layout of a Goden site
 Goden relies on markdown files and go templates to generate pages.
+## content
+The content folder contains blog content.
+Content can be organized by two specifiers: Categories or Tags.
+
+Each folder within the content folder will be rendered as a Category node.
+Categories are good ways to separate large groups of content.
+
+Tags are specified within the frontmatter of each markdown file using YAML.
+
+Categories being delimited by folders means that each post can belong to only one category.
+There is no limit, however, on the number of tags that can be attributed to a post.
+
+## src
+This folder will contain any source files which need to be built as npm dependent javascript or scss.
+
+## static
+This folder contains all static files.
+This should include images and any files generated from the src dir.
+
+## templates
+This folder contains template files that will be used to render your final site.
+
