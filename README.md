@@ -21,8 +21,25 @@ It should be reverse proxied by your http server.
 
 # Layout of a Goden site
 Goden relies on markdown files and go templates to generate pages.
+Every markdown file generates regular node.
+Frontmatter tags generate Tag nodes.
+Folders in the content directory generate Category nodes.
+
+External links in markdown will generate external link nodes.
+Internal links can be specified with the format `{Link Text}[NodeID]`.
+
+The NodeID is always the name of the markdown file in the case of regular nodes (for example `{Test Post}[test-post.md]`).
+
+For tags or categories it is simply the name (for example `{Test Category}[tests]`).
+
+Note that each post, category, and node must have a unique specifier. That is, a category named "test" precludes usage of the keyword "test" as a tag in the front matter.
+
+Nodes are NOT specified by folder/category. That is, "pictures/test.md" and "music/test.md" will both generate the same NodeID and such collisions should be avoided.
+
+
+
 ## content
-The content folder contains blog content.
+The content directory contains blog content.
 Content can be organized by two specifiers: Categories or Tags.
 
 Each folder within the content folder will be rendered as a Category node.
