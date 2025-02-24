@@ -1,0 +1,8 @@
+Gorden:
+    Gorden is a digital garden.
+    It has two components - the site generation and the live api.
+    I think the server should be a separate app for deployment purposes.
+    functions - 
+        init
+        test server
+        deploy?
