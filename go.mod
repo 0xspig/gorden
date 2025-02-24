@@ -1,4 +1,4 @@
-module goden.tsmckee.com
+module gorden.tsmckee.com
 
 go 1.23.1
 

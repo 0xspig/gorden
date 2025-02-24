@@ -1,0 +1,15 @@
+[Unit]
+Description=TSM go webserver
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=exec
+Restart=always
+RestartSec=5
+User=root
+WorkingDirectory=/var/www/tsm-git/
+ExecStart=/var/www/tsm-git/web
+
+[Install]
+WantedBy=multi-user.target
