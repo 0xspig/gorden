@@ -1,7 +1,6 @@
 package server
 
 import (
-	"flag"
 	"log/slog"
 	"net/http"
 	"os"
@@ -14,7 +13,18 @@ type Application struct {
 	Garden *garden.Garden
 }
 
-func (app *Application) Start() {
+func (app *Application) Init(dir string, renderDrafts bool) {
+
+	var err error
+	if dir == "" {
+		dir, err = os.Getwd()
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	os.Chdir(dir)
+
 	g := garden.CreateGarden()
 
 	// TODO make content dir in config or something to search files in
@@ -23,18 +33,18 @@ func (app *Application) Start() {
 	g.ParseAllConnections()
 	g.GenAssets()
 
-	addr := flag.String("addr", "localhost:3000", "HTTP Network Address")
-	flag.Parse()
+	newLogger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
-	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
-
-	app = &Application{
-		logger: logger,
+	*app = Application{
+		logger: newLogger,
 		Garden: g,
 	}
-	logger.Info("Starting server on", "addr", *addr)
-	err := http.ListenAndServe(*addr, app.routes())
+}
 
-	logger.Error(err.Error())
+func (app *Application) Start(addr string) {
+	app.logger.Info("Starting server on", "addr", addr)
+	err := http.ListenAndServe(addr, app.routes())
+
+	app.logger.Error(err.Error())
 	os.Exit(1)
 }

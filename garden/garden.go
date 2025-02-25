@@ -27,13 +27,14 @@ type StringSet map[string]bool
 
 // Struct containing a hash table of all nodes in graph
 type Garden struct {
-	Masterlist map[string]*Node
-	idList     []string
-	size       int
-	Tags       StringSet
-	Categories StringSet
-	Center     string
-	Templates  map[string]*template.Template
+	Masterlist   map[string]*Node
+	idList       []string
+	size         int
+	Tags         StringSet
+	Categories   StringSet
+	Center       string
+	Templates    map[string]*template.Template
+	RenderDrafts bool
 }
 
 const (
@@ -65,11 +66,12 @@ type NodeList []Node
 
 func CreateGarden() *Garden {
 	return &Garden{
-		Masterlist: make(map[string]*Node),
-		size:       0,
-		Tags:       make(StringSet),
-		Categories: make(StringSet),
-		Templates:  make(map[string]*template.Template),
+		Masterlist:   make(map[string]*Node),
+		size:         0,
+		Tags:         make(StringSet),
+		Categories:   make(StringSet),
+		Templates:    make(map[string]*template.Template),
+		RenderDrafts: false,
 	}
 }
 func (garden *Garden) ContainsID(id string) bool {
@@ -104,7 +106,7 @@ func (garden *Garden) addNodeToGarden(datatype int, source string, id string, na
 			panic(err)
 		}
 		yaml := scanYAMLFrontMatter(data)
-		if yaml.Draft {
+		if !garden.RenderDrafts && yaml.Draft {
 			return nil
 		}
 		newNode.Metadata = *yaml

@@ -10,26 +10,35 @@ import (
 )
 
 func main() {
-	initFlag := flag.Bool("init", true, "initalize new Gorden site in CWD")
+	initFlag := flag.Bool("init", false, "initalize new Gorden site in CWD")
+	serveFlag := flag.Bool("serve", false, "Serve local gorden")
+	draftFlag := flag.Bool("drafts", false, "enable draft rendering")
+	addrFlag := flag.String("addr", "localhost:3000", "local server address (defaults to localhost:3000)")
+	dirFlag := flag.String("dir", "", "optional base dir (default is CWD)")
+	flag.Parse()
+	fmt.Printf("init: %t\nserve:%t\ndraft:%t\n", *initFlag, *serveFlag, *draftFlag)
 	if *initFlag {
-		GordenInit()
+		GordenInit(*dirFlag)
 		return
 	}
-
-}
-
-func GordenServe() {
 	app := server.Application{}
-	app.Start()
+	if *serveFlag {
+		app.Init(*dirFlag, *draftFlag)
+		app.Start(*addrFlag)
+	}
+
 }
 
-func GordenInit() {
-	fmt.Println("Initializing Gorden Site")
-	cwd, err := os.Getwd()
-	if err != nil {
-		panic(err)
+func GordenInit(dir string) {
+	var err error
+	if dir == "" {
+		dir, err = os.Getwd()
+		if err != nil {
+			panic(err)
+		}
 	}
-	f, err := os.Open(cwd)
+	fmt.Printf("Initializing Gorden Site in %s", dir)
+	f, err := os.Open(dir)
 	if err != nil {
 		panic(err)
 	}

@@ -1,6 +1,6 @@
 PREFIX = /usr/local
 
-build:
+build: ./app/* ./garden/* ./server/*
 	go build -o ./build/gorden ./app/gorden.go
 install: build
 	mkdir -p ${DESTDIR}${PREFIX}/bin
