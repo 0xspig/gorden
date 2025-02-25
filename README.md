@@ -10,7 +10,7 @@ Second - running the backend.
 ## Site Generation
 To create a new site navigate to an empty folder and run:
 
-``` gorden init "Site Name" ```
+``` gorden -init "Site Name" ```
 
 This will populate the current working directory with the base files.
 
