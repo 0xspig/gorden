@@ -6,7 +6,12 @@ Gorden:
         init
         test server
         deploy?
-    ✔ Optionally render drafts @done(25-02-24 20:33)
     ☐ Add watcher
-    ☐ Env files? @started(25-02-24 19:13)
+    ☐ Env files?
     ☐ order posts by date
+    ☐ de-spaghetti templates @started(25-02-25 11:43)
+    ☐ add robots.txt
+Archive:
+  ✔ Optionally render drafts @done(25-02-24 20:33) @project(Gorden)
+  ✔ include (inactive) hrefs in links @done(25-02-25 11:43) @project(Gorden.Improve SEO)
+  ✘ remove .md extension so bots can predict urls better @cancelled(25-02-25 11:17) dumb idea, just make it crawlable and dont worry about it @project(Gorden.Improve SEO)
