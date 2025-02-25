@@ -192,7 +192,7 @@ func (garden *Garden) GenAssets() {
 		}
 		item := &feeds.Item{
 			Title:   post.Metadata.Title,
-			Link:    &feeds.Link{Href: "https://web.tsmckee.com/" + post.ID},
+			Link:    &feeds.Link{Href: garden.Info.Link + post.ID},
 			Author:  me,
 			Updated: date,
 			Content: string(garden.mdToRSS(post)),
