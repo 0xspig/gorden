@@ -19,7 +19,7 @@ The backend can be installed as a systemd service on your server.
 By default the server runs on localhost:3000.
 It should be reverse proxied by your http server.
 
-# Layout of a Goden site
+# Layout of a Gorden site
 Goden relies on markdown files and go templates to generate pages.
 Every markdown file generates regular node.
 Frontmatter tags generate Tag nodes.
