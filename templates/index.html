@@ -1,0 +1,68 @@
+<div id="response">
+	<div id="bio">
+		<img src="/static/images/me_irl.jpg" alt="Me and my violin" id="me_irl" width="45%" height="auto">
+		<h1>Hi.</h1>
+		<p>My name is Tyler McKee and this is my website.
+
+		<br>
+		<br>
+		I'm a carpenter by trade and I have too many hobbies to list.
+		<br>
+		The bulk of content here is painting but there's also some geometry, woodworking, baking... really anything I think is fun enough to write about.
+		<br>
+		I try to keep the content useful - or at the very least interesting - so it tends to be sparse.
+		<br>
+		<br>
+		The best way to keep up is via <a href="/blog/chad-rss" onmouseout="highlightNode('')" onmouseover="highlightNode('gallery')" onclick="return targetNode('gallery')">RSS</a>.
+		<br>
+		<b>
+		<a href="/index.xml">Blog RSS</a>
+		</b>
+		<br>
+		<br>
+		Feel free to drop me a line at: <span id="email">tyler<span style="display: none;">BEGONE BOTS</span>@tsmckee.com </span>
+		</p>
+
+
+	</div>
+	<div style="clear:both"></div>
+	<div class="separator" class="floatfix"></div>
+
+	<div class="recent" id="gallery">
+	<h1 class="header-link" onmouseout="highlightNode('')" onmouseover="highlightNode('gallery')" onclick="return targetNode('gallery')">Gallery:</h1>
+	{{ with index .Masterlist "sketch"}}
+	{{$latest := .Latest}}
+	{{with .Latest.Metadata}}
+	<a href="/{{$latest.ID}}" >
+		<img class="img" src={{ .Image }} alt={{ .Imgalt }} style="width:80%; object-fit:cover; aspect-ratio:1/1;height:auto" onmouseout="highlightNode('')" onmouseover="highlightNode('{{$latest.ID}}')" onclick="return targetNode('{{$latest.ID}}')">
+	</a>
+	{{end}}
+	{{end}}
+	</div>
+
+	<div class="recent" id="blog">
+		<h1 class="header-link" onmouseout="highlightNode('')" onmouseover="highlightNode('blog')" onclick="return targetNode('blog')">Blog/Updates:</h1>
+		{{ with index .Masterlist "blog" }}
+		{{with .Latest}}
+		<a class="post" href="/{{ .ID }}"  onmouseout="highlightNode('')" onmouseover="highlightNode('{{.ID}}')" onclick="return targetNode('{{.ID}}')">
+		<h2>{{ .Name }}</h2>
+
+		</a>
+		{{end}}
+		{{end}}
+	</div>
+	<div class="floatfix"></div>
+	
+	<br>
+	<br>
+	<div id="home-tags">
+	    <h2 class="home-tag-header">Tags:</h2>
+	    {{with .Tags}}
+	    {{range $key, $value := .}}
+	        <a class="home-tag-button" href="/{{$key}}" onclick="return targetNode({{$key}})" onmouseover="highlightNode({{$key}})" onmouseout="highlightNode('')">{{$key}}</a>
+	    {{end}}
+	    {{end}}
+
+	</div>
+	<div class="floatfix"></div>
+</div>

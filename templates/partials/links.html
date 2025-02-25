@@ -1,0 +1,37 @@
+{{define "links"}}
+
+{{with .OutgoingNodes}}
+<h2>Outgoing Nodes: </h2>
+<ul >
+{{range $key, $value := .}}
+    <li
+    {{ if eq $key.Data_type 4}}
+    style="list-style-type: square; color:brown;"
+    {{end}}
+    ><a class="internal-link"
+    {{ if eq $key.Data_type 4}}
+    style="color:brown;"
+    {{end}}
+    style="display:inline-block;width:100%"
+     href="/{{$key.ID}}" onclick="return targetNode({{$key.ID}})" onmouseover="highlightNode({{$key.ID}})" onmouseout="highlightNode('')">{{$key.Name}}</a></li>
+{{end}}
+</ul>
+{{end}}
+{{with .IncomingNodes}}
+<h2>Incoming Nodes: </h2>
+<ul >
+{{range $key, $value := .}}
+    <li
+    {{ if eq $key.Data_type 4}}
+    style="list-style-type: square; color:brown;"
+    {{end}}
+    ><a class="internal-link"
+    {{ if eq $key.Data_type 4}}
+    style="color:brown;"
+    {{end}}
+    style="display:inline-block; width:100%"
+    href="/{{$key.ID}}" onclick="return targetNode({{$key.ID}})" onmouseover="highlightNode({{$key.ID}})" onmouseout="highlightNode('')">{{$key.Name}}</a></li>
+{{end}}
+</ul>
+{{end}}
+{{end}}

@@ -1,0 +1,27 @@
+{{define "base"}}
+<!DOCTYPE html>
+ <html lang="en">
+    {{- template "head.html" . -}}
+
+<body>
+	<div id="main-container">
+	<div id="main-layout">	
+		<script type="module" src="/static/gen/main.js"></script>
+		<script type="module" >
+			import {targetNode} from "/static/gen/main.js";
+			import {highlightNode} from "/static/gen/main.js";
+			window.targetNode = targetNode;
+			window.highlightNode = highlightNode;
+		</script>
+		{{- template "header.html" . -}}
+		<div id="content">
+		</div>
+        {{- template "footer.html" . -}}
+	</div>
+	</div>
+		{{- template "web.html" -}}
+	
+</body>
+
+</html>
+{{end}}
