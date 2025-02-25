@@ -1,0 +1,529 @@
+@use "sass:math";
+
+// GLOBAL
+@font-face {
+	font-family: "Trirong";
+	src: 	url("/static/fonts/trirong/Trirong-Medium.ttf"),
+	url("/static/fonts/trirong/Trirong-Thin.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Montserrat";
+	src: url("/static/fonts/montserrat/static/Montserrat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Amethysta";
+	src: url("/static/fonts/amethysta/Amethysta-Regular.ttf") format("truetype");
+}
+
+$sans-stack: "Montserrat", "Arial", sans-serif;
+$serif-stack: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+
+// colors
+$color-bg-mid: #626d64;
+$color-bg-white: #f2eeea;
+$color-text: #323738;
+$color-text-light: #f9f1e9;
+$color-text-dark: #3e4642;
+$color-text-link: #bf9b6e;
+$color-text-highlight: #b9c3bb;
+
+::selection{
+	background-color: $color-text-highlight;
+}
+
+// constants
+$main-width: min(50em, 90%);
+
+html{
+    scrollbar-color: $color-text-highlight $color-bg-mid;
+    scrollbar-width: .75em;
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: "Montserrat";
+	background-color: $color-bg-mid;
+	margin: 0px;
+	padding: 0px;
+	padding-inline: auto;
+	display:flex;
+	flex-direction: row;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $sans-stack;
+    font-weight: normal;
+	color: $color-text;
+	transition: color .4s;
+}
+
+.header-link{
+	cursor: pointer;
+}
+
+.header-link:hover{
+	color: $color-text-link;
+	transition: color .2s;
+}
+
+.recent {
+	img{
+		opacity: 1;
+		transition: opacity .4s;
+	}
+	img:hover{
+		opacity: .8;
+		transition: opacity .2s;
+	}
+
+	.post h2{
+		color: $color-text;
+		transition: color .4s;
+	}
+	.post:hover h2{
+		color: $color-text-link;
+		transition: color .2s;
+	}
+
+}
+
+#home-tags{
+    display: block;
+    text-align: center;
+    width:80%;
+    margin-inline: auto;
+    margin-bottom:2em;
+}
+
+.home-tag-button {
+    margin-block:.25em;
+    cursor: pointer;
+	display:inline-block;
+	height: auto;
+	padding-block: .75em;
+	padding-inline:.5em;
+	background: $color-bg-white;
+	border: 1px solid $color-text-highlight;
+	color: $color-text-dark;
+	
+	transition: color .4s, background-color .4s, border-color .4s;
+
+}
+.home-tag-button:hover {
+	color: $color-text-light;
+	background-color: $color-bg-mid;
+	border-color: $color-text-highlight;
+
+	transition: background .2s;
+}
+
+a {
+	text-decoration: none;
+	color: $color-text-link;
+}
+
+.internal-link{
+    margin:auto;
+    color: $color-text-link;
+    text-decoration: underline;
+    transition: color .4s;
+}
+.internal-link:visited{
+    color: #6e8282;
+}
+.internal-link:hover{
+    cursor: pointer;
+    color: $color-text-highlight;
+    transition: color .2s;
+}
+// Main Container
+#main-container {
+	flex:2 1 $main-width;
+}
+#main-layout{
+	width:$main-width;
+	margin-right: 1em;
+	margin-left:auto;
+}
+
+// HEADER
+#header {	
+	a {
+		color: inherit;
+		text-decoration: inherit;
+		cursor:pointer;
+	}
+
+	text-decoration: none;
+	color: $color-text;
+	width: 100%;
+	margin-inline:auto;
+	padding-top: 3.5em;
+	//border: 3px solid $color-bg-white;
+
+	$banner-width: 2.7em;
+	#banner {
+		text-align: left;
+		display: inline-block;
+ 	  	font-size: 2em;
+		font-family: Trirong, sans-serif;
+ 	  	font-weight: 300;
+		padding-left: 7px;
+		padding-right: 10px;
+		width: $banner-width;
+		border-top: 2px solid #bf9b6e;
+		border-bottom: 2px solid #bf9b6e;
+		text-align: left;
+		margin-top: auto;
+		color: $color-text-light;
+	}
+	nav {
+		float: right;
+		text-align: right;
+		width: calc($main-width - $banner-width);
+		height: 100%;
+		display: inline-block;
+		padding-top: 1.5em;
+		.section-button {
+			display:inline-block;
+			height: auto;
+			padding-block: .75em;
+			padding-left:.4em;
+			padding-right:.4em;
+			background: $color-bg-white;
+			border: 1px solid $color-text-highlight;
+			color: $color-text-dark;
+			
+			transition: color .6s, background-color .6s, border-color .6s;
+
+		}
+		.section-button:hover {
+			color: $color-text-light;
+			background-color: $color-bg-mid;
+			border-color: $color-text-highlight;
+
+			transition: background .2s;
+		}
+	}
+
+	@media screen and (orientation: portrait) { 
+		width: 100%;
+		text-align: center;
+		#banner {
+			text-align: inherit;
+			font-size:3em;
+		}
+		nav {
+			width: 100%;
+			float: none;
+			text-align: inherit;
+			margin-top:1em;
+		}
+	}
+
+
+}
+
+// Index
+#bio {
+	img {
+		aspect-ratio: 1/1;
+		margin-top:4em;
+		margin-inline:1em;
+		float: right;
+		border: 3px double $color-text-highlight;
+	}
+}
+
+#email {
+	color: $color-text-link;
+	font-weight: bold;
+}
+
+.separator {
+	display: block;
+	margin-top:3em;
+	margin-inline: auto;
+	width: 85%;
+	height: 5px;
+	border-top: 2px solid $color-text-highlight;
+	border-bottom: 2px solid $color-text-highlight;
+}
+
+.post {
+	display: block;
+	border: 3px double $color-text-highlight;
+	background-color: $color-text-light;
+	color: $color-text;
+	box-sizing: border-box;
+	padding: 1em;
+	margin-inline: 1em;
+}
+
+#gallery {
+	text-align: center;
+	float:left;
+	width: 50%;
+}
+
+#blog {
+	text-align: center;
+	float: right;
+	width: 50%;
+}
+
+.floatfix{
+	clear:both;
+}
+
+@media screen and (orientation: portrait) {
+	#gallery, #blog {
+		float: none;
+		display: block;
+		width: 100%;
+	}
+}
+
+// Content
+
+#content {
+	width: 100%;
+	height: 0px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:1em;
+	margin-bottom:1em;	
+	box-sizing: border-box;
+	background: $color-bg-white;
+	border: 5px double $color-text-highlight;
+	color: $color-text;
+	padding-inline: 1em;
+	padding-top: .3em;
+	padding-bottom: 3em;
+	overflow-y: hidden;
+	transition: height .3s ease-in-out;
+	#response {
+		opacity: 0%;
+		transition: opacity .4s ease-in-out;
+	}
+}
+
+.blog-title {
+	color: $color-bg-mid;
+}
+
+.img {
+	border: 3px double $color-text-highlight;
+	//border-style: groove ridge ridge groove;
+}
+
+// Web
+
+#web-container{
+	position:sticky;
+	top:0px;
+    background-color: $color-bg-mid;
+    flex-grow: 1;
+    flex-basis:25%;
+	max-width: 35%;
+	height: 100vh;
+	margin-right: auto;
+	margin-left: .5em;
+}
+
+#web-layout{
+	width: 55%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+// Scene
+#view{
+	margin-top: 3em;
+	width: 100%;
+	max-height: fit-content;
+	aspect-ratio: 1/1;
+	border: 5px double $color-text-highlight;
+	div{
+		div{
+			.scene-container{
+				#scene{
+				}
+			}
+		}
+	}
+}
+
+// links
+#view-bottom{
+	flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+	overflow-y: scroll;
+    scrollbar-color: $color-bg-mid $color-bg-white;
+    scrollbar-width: .75em;
+    scrollbar-gutter: stable;
+	width: 100%;
+    margin-top: .75em;
+    margin-inline: 0px;
+	margin-bottom: 2em;
+	border: 5px double $color-text-highlight;
+}
+
+#link-data{
+    padding-inline: 1em;
+	padding-bottom:1em;
+    flex-grow: 1;
+    background-color: $color-bg-white;
+}
+
+#button-container {
+    padding-top: 1em;
+    padding-bottom: 0px;
+    background-color: $color-bg-white;
+}
+
+#donate-button {
+    cursor: pointer;
+    display:block;
+	padding-block: .75em;
+	padding-inline:.5em;
+    margin-inline: auto;
+    margin-block: .4em;
+    width:fit-content;
+    height: fit-content; 
+    font-size: large;
+    font-weight: 700;
+    text-decoration: none;
+	color: $color-text-light;
+	background-color: $color-bg-mid;
+	border: 1px solid $color-text-highlight;
+	transition: color .4s, background-color .4s, border-color .4s;
+
+}
+#donate-button:hover {
+	background: $color-bg-white;
+	border: 1px solid $color-text-highlight;
+	color: $color-text-dark;
+
+	transition: background .2s;
+}
+
+
+// Gallery
+.gallery-post{
+	width: calc(100% / 3.1);
+	display: inline-block;
+	text-align: center;
+	img {
+		aspect-ratio: 1/1;
+		width: 95%;
+		object-fit: cover;
+	}
+}
+
+
+// Footer
+
+#heaventree {
+	font-size: 1.1em;
+	text-align: center;
+	display: block;
+	border: 5px double $color-text-highlight;
+	width: fit-content;
+	padding-inline: 1em;
+	padding-bottom: 1em;
+	margin-inline:auto;
+	margin-top: 3em;
+	margin-bottom: 4em;
+	color: $color-text;
+	background-color: $color-bg-white;
+	
+}
+
+// Hack css while while I (dont) make shortcodes
+
+.article-container {
+	box-sizing: border-box;
+	padding-left: 1em;
+	padding-right: 1em;
+	margin-bottom: 1em;
+	width: 100%;
+	text-align:left;
+	float:none;
+}
+
+.article-container{
+	img {
+		padding: none;
+		margin: none;
+		border: none;
+		height: auto;
+		max-width: 100%;
+	}
+
+	.image-float-right img {
+		width: 45%;
+		float:right;
+		margin:auto;
+		padding:1em;
+	}
+	.image-float-left img {
+		width: 45%;
+		float:left;
+		margin:auto;
+		padding:1em;
+	}
+	.image-center img {
+		margin-left:auto;
+		margin-right:auto;
+		display:block;
+	}
+}
+
+.article-footer {
+	height: 5em;
+	text-align: center;
+}
+
+#back-btn {
+	display: inline-block;
+	text-align: center;
+	margin-block:1em;
+	margin-left: auto;
+	margin-right: auto;
+	height:1.5em; 
+	width: fit-content; 
+	padding: .5em; 
+	border: 4px double $color-text-highlight;
+	background-color: $color-text-light;
+	color: $color-text;
+}
+
+.art-button {
+	box-sizing: border-box;
+	display:inline-block;
+	border-style: double;
+	border-color: $color-text-highlight;
+	min-height: 3em;	
+	width: min(10em, 30%);
+	padding-left: .5em;
+	padding-right: .5em;
+	margin-inline:2em;
+	color: $color-text;
+	background-color: $color-text-light;
+	padding-block: .4em;
+	
+}
+
+#next {
+		float: right;
+	}
+
+#prev {
+		float: left;
+	}
