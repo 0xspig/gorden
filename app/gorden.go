@@ -16,9 +16,9 @@ func main() {
 	addrFlag := flag.String("addr", "localhost:3000", "local server address (defaults to localhost:3000)")
 	dirFlag := flag.String("dir", "", "optional base dir (default is CWD)")
 	flag.Parse()
-	fmt.Printf("init: %t\nserve:%t\ndraft:%t\n", *initFlag, *serveFlag, *draftFlag)
+	fmt.Printf("init: %t\nserve:%t\ndraft:%t\nname:%s\n", *initFlag, *serveFlag, *draftFlag, flag.Arg(0))
 	if *initFlag {
-		GordenInit(*dirFlag)
+		GordenInit(*dirFlag, flag.Arg(0))
 		return
 	}
 	app := server.Application{}
@@ -29,15 +29,17 @@ func main() {
 
 }
 
-func GordenInit(dir string) {
+func GordenInit(dir string, siteName string) {
 	var err error
 	if dir == "" {
 		dir, err = os.Getwd()
 		if err != nil {
 			panic(err)
 		}
+	} else {
+		os.Chdir(dir)
 	}
-	fmt.Printf("Initializing Gorden Site in %s", dir)
+	fmt.Printf("Initializing Gorden Site in %s\n", dir)
 	f, err := os.Open(dir)
 	if err != nil {
 		panic(err)
@@ -46,8 +48,10 @@ func GordenInit(dir string) {
 
 	_, err = f.Readdirnames(1)
 	if err != io.EOF {
-		fmt.Println("Directory must be empty to initialize new Gorden site")
+		fmt.Println("FAILED: Directory must be empty to initialize new Gorden site")
 		return
+	} else {
+		fmt.Println("SUCCESS: Gorden site initialized")
 	}
 
 	os.Mkdir("src", 0755)
