@@ -16,7 +16,7 @@ func main() {
 	addrFlag := flag.String("addr", "localhost:3000", "local server address (defaults to localhost:3000)")
 	dirFlag := flag.String("dir", "", "optional base dir (default is CWD)")
 	flag.Parse()
-	fmt.Printf("init: %t\nserve:%t\ndraft:%t\nname:%s\n", *initFlag, *serveFlag, *draftFlag, flag.Arg(0))
+	fmt.Printf("init: %t\nserve:%t\ndraft:%t\nname:%s\ndir:%s\n", *initFlag, *serveFlag, *draftFlag, flag.Arg(0), *dirFlag)
 	if *initFlag {
 		GordenInit(*dirFlag, flag.Arg(0))
 		return

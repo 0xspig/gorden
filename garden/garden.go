@@ -29,6 +29,15 @@ type Garden struct {
 	Center       string
 	Templates    map[string]*template.Template
 	RenderDrafts bool
+	Info         SiteData
+}
+
+type SiteData struct {
+	Title       string
+	Link        string
+	Author      string
+	Email       string
+	Description string
 }
 
 const (
@@ -59,6 +68,17 @@ type Node struct {
 type NodeList []Node
 
 func CreateGarden() *Garden {
+	var siteData SiteData
+	var YAMLBytes []byte
+	YAMLBytes, err := os.ReadFile("site.yaml")
+	if err != nil {
+		fmt.Println("Error: 'site.yaml' not found in base dir")
+		panic(err)
+	}
+	err = yaml.Unmarshal(YAMLBytes, &siteData)
+	if err != nil {
+		panic(err)
+	}
 	return &Garden{
 		Masterlist:   make(map[string]*Node),
 		size:         0,
@@ -66,6 +86,7 @@ func CreateGarden() *Garden {
 		Categories:   make(StringSet),
 		Templates:    make(map[string]*template.Template),
 		RenderDrafts: false,
+		Info:         siteData,
 	}
 }
 func (garden *Garden) ContainsID(id string) bool {

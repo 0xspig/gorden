@@ -155,6 +155,13 @@ func (garden *Garden) catToHtml(node *Node) []byte {
 }
 
 // Generate staic assets
+/*
+	Currently this function is completely bloated.
+	It's doing 100% of the template work and its all hardcoded.
+	Ideally we should have one function that generates default templates and a second function that generates other templates.
+	First, what are the necessary defaults?
+	baseof,
+*/
 func (garden *Garden) GenAssets() {
 	// cache node data
 	json_data, err := garden.genJSONData()
@@ -163,13 +170,13 @@ func (garden *Garden) GenAssets() {
 	}
 	os.WriteFile("ui/static/gen/graph-data.json", json_data, 0644)
 
-	me := &feeds.Author{Name: "Tyler McKee", Email: "tyler@tsmckee.com"}
+	me := &feeds.Author{Name: garden.Info.Author, Email: garden.Info.Email}
 
 	// create Atom feed
 	feed := feeds.Feed{
-		Title:       "TS McKee",
-		Link:        &feeds.Link{Href: "https://web.tsmckee.com/"},
-		Description: "Tech, Painting, Woodworking",
+		Title:       garden.Info.Title,
+		Link:        &feeds.Link{Href: garden.Info.Link},
+		Description: garden.Info.Description,
 		Author:      me,
 		Created:     time.Now(),
 	}
