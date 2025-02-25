@@ -1,5 +1,5 @@
 [Unit]
-Description=TSM go webserver
+Description={{SITENAME}} Gorden Web Server
 After=network.target
 StartLimitIntervalSec=0
 
@@ -8,8 +8,8 @@ Type=exec
 Restart=always
 RestartSec=5
 User=root
-WorkingDirectory=/var/www/tsm-git/
-ExecStart=/var/www/tsm-git/web
+WorkingDirectory={{GORDENWD}}
+ExecStart={{GORDENEXEC}}
 
 [Install]
 WantedBy=multi-user.target
