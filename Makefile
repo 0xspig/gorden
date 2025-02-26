@@ -3,7 +3,6 @@ PREFIX = /usr/local
 build: ./app/* ./garden/* ./server/*
 	go build -o ./build/gorden ./app/gorden.go
 install: build
-	#TODO copy def files into appropriate system directory
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f ./build/gorden ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/gorden
