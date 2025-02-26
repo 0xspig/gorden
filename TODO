@@ -10,9 +10,9 @@ Gorden:
     ☐ Env files?
     ☐ order posts by date
     ☐ de-spaghetti templates @started(25-02-25 11:43)
-    ☐ copy src files
-    ☐ add robots.txt
 Archive:
+  ✔ copy src files @done(25-02-25 21:41) @project(Gorden)
+  ✘ add robots.txt @cancelled(25-02-25 21:42) @project(Gorden)
   ✔ Optionally render drafts @done(25-02-24 20:33) @project(Gorden)
   ✔ include (inactive) hrefs in links @done(25-02-25 11:43) @project(Gorden.Improve SEO)
   ✘ remove .md extension so bots can predict urls better @cancelled(25-02-25 11:17) dumb idea, just make it crawlable and dont worry about it @project(Gorden.Improve SEO)
