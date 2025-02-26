@@ -20,17 +20,17 @@ By default the server runs on localhost:3000.
 It should be reverse proxied by your http server.
 
 # Layout of a Gorden site
-Goden relies on markdown files and go templates to generate pages.
+Gorden relies on markdown files and go templates to generate pages.
 Every markdown file generates regular node.
 Frontmatter tags generate Tag nodes.
 Folders in the content directory generate Category nodes.
 
 External links in markdown will generate external link nodes.
-Internal links can be specified with the format `{Link Text}[NodeID]`.
+Internal links can be specified with the format `{Link Text}(NodeID)`.
 
-The NodeID is always the name of the markdown file in the case of regular nodes (for example `{Test Post}[test-post.md]`).
+The NodeID is always the name of the markdown file in the case of regular nodes (for example `{Test Post}(test-post.md)`).
 
-For tags or categories it is simply the name (for example `{Test Category}[tests]`).
+For tags or categories it is simply the name (for example `{Test Category}(tests)`).
 
 Note that each post, category, and node must have a unique specifier. That is, a category named "test" precludes usage of the keyword "test" as a tag in the front matter.
 
