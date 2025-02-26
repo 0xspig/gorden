@@ -56,5 +56,14 @@ func GordenInit(dir string, siteName string) {
 
 	os.Mkdir("src", 0755)
 	os.Mkdir("static", 0755)
+	os.Mkdir("static/gen", 0755)
 	os.Mkdir("templates", 0755)
+	os.Mkdir("content", 0755)
+
+	templates := os.DirFS("/usr/local/share/gorden/templates")
+	os.CopyFS("templates", templates)
+
+	defaults := os.DirFS("/usr/local/share/gorden/def/")
+	os.CopyFS(".", defaults)
+
 }
