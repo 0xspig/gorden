@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "3d-force-graph": "^1.74.4",
+    "package.json": "^2.0.1",
+    "rollup": "^4.34.8"
+  },
+  "devDependencies": {
+    "rollup-plugin-scss": "^4.0.1",
+    "sass": "^1.85.1"
+  }
+}

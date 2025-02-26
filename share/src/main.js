@@ -1,4 +1,5 @@
 import ForceGraph3D from "3d-force-graph";
+import './main.scss'
 
 const Graph = new ForceGraph3D(document.getElementById('view'))
   .width(document.getElementById("view").getBoundingClientRect().width)
