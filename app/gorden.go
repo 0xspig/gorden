@@ -66,4 +66,15 @@ func GordenInit(dir string, siteName string) {
 	defaults := os.DirFS("/usr/local/share/gorden/def/")
 	os.CopyFS(".", defaults)
 
+	src := os.DirFS("/usr/local/share/gorden/src")
+	err = os.CopyFS("src", src)
+	if err != nil {
+		panic(err)
+	}
+	content := os.DirFS("/usr/local/share/gorden/content")
+	os.CopyFS("content", content)
+	if err != nil {
+		panic(err)
+	}
+
 }
