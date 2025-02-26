@@ -1,6 +1,9 @@
 # Gorden - Golang Digital Garden
 Gorden is a digital garden written in Golang.
 It's basically a lightweight SSG shipped with a node graph backend.
+I created Goden because I wanted backlinks on my site but a full wiki engine was total overkill.
+The end goal of Gorden is to function like Hugo but with SSR and backlinking.
+As of writing, the project is in the process of being decoupled from [my webiste](blog.tsmckee.com) and thus VERY broken.
 
 # Install
 Creating a digital garden with Gorden involves two steps.
