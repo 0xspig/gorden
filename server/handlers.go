@@ -21,7 +21,7 @@ func (app *Application) home(w http.ResponseWriter, r *http.Request) {
 func (app *Application) getJSON(w http.ResponseWriter, r *http.Request) {
 	app.logger.Debug("getJSON Function Run")
 	w.Header().Add("Server", "McServer")
-	json, err := os.ReadFile("ui/static/gen/graph-data.json")
+	json, err := os.ReadFile("static/gen/graph-data.json")
 	if err != nil {
 		app.logger.Error("Error loading json", err)
 		return

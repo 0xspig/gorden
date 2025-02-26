@@ -219,7 +219,7 @@ func (garden *Garden) ParseAllConnections() {
 			}
 
 			// parent node (category) directs to child (post)
-			category_id, err := filepath.Rel("ui/content", filepath.Dir(node.Data_source))
+			category_id, err := filepath.Rel("content", filepath.Dir(node.Data_source))
 			if err != nil {
 				panic(err)
 			}

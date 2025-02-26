@@ -109,7 +109,7 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 
 	switch node.Metadata.Class {
 	default:
-		ts, err := template.ParseFiles("ui/templates/single.html")
+		ts, err := template.ParseFiles("templates/single.html")
 		if err != nil {
 			panic(err)
 		}
@@ -125,7 +125,7 @@ func (garden *Garden) mdToHTML(node *Node) []byte {
 		return template_buf.Bytes()
 	case "home":
 		fmt.Println("home template")
-		ts, err := template.ParseFiles("ui/templates/index.html")
+		ts, err := template.ParseFiles("templates/index.html")
 		if err != nil {
 			panic(err)
 		}
@@ -160,7 +160,9 @@ func (garden *Garden) catToHtml(node *Node) []byte {
 	It's doing 100% of the template work and its all hardcoded.
 	Ideally we should have one function that generates default templates and a second function that generates other templates.
 	First, what are the necessary defaults?
-	baseof,
+	baseof - base template... obivously
+	single - default template for posts
+
 */
 func (garden *Garden) GenAssets() {
 	// cache node data
@@ -168,7 +170,10 @@ func (garden *Garden) GenAssets() {
 	if err != nil {
 		panic(err)
 	}
-	os.WriteFile("ui/static/gen/graph-data.json", json_data, 0644)
+	err = os.WriteFile("static/gen/graph-data.json", json_data, 0644)
+	if err != nil {
+		panic(err)
+	}
 
 	me := &feeds.Author{Name: garden.Info.Author, Email: garden.Info.Email}
 
@@ -200,19 +205,19 @@ func (garden *Garden) GenAssets() {
 		feed.Add(item)
 	}
 
-	xml, err := os.Create("ui/static/index.xml")
+	xml, err := os.Create("static/index.xml")
 	if err != nil {
 		panic(err)
 	}
 	feed.WriteAtom(xml)
 
 	// parse templates
-	partials, err := filepath.Glob("ui/templates/partials/*.html")
+	partials, err := filepath.Glob("templates/partials/*.html")
 	if err != nil {
 		panic(err)
 	}
 	base_files := []string{
-		"./ui/templates/baseof.html",
+		"./templates/baseof.html",
 	}
 	base_files = append(base_files, partials...)
 	base_template, err := template.ParseFiles(base_files...)
@@ -221,31 +226,31 @@ func (garden *Garden) GenAssets() {
 	}
 	garden.Templates["base_template"] = base_template
 
-	list_template, err := template.ParseFiles("ui/templates/list.html")
+	list_template, err := template.ParseFiles("templates/list.html")
 	if err != nil {
 		panic(err)
 	}
 	garden.Templates["list_template"] = list_template
-	//category_template, err := template.ParseFiles("ui/templates/cat.template.html", "ui/templates/footer.template.html")
+	//category_template, err := template.ParseFiles("templates/cat.template.html", "templates/footer.template.html")
 	//if err != nil {
 	//	panic(err)
 	//}
 	//garden.Templates["category_template"] = category_template
 
-	//tag_template, err := template.ParseFiles("ui/templates/tag.template.html", "ui/templates/footer.template.html")
+	//tag_template, err := template.ParseFiles("templates/tag.template.html", "templates/footer.template.html")
 	//if err != nil {
 	//	panic(err)
 	//}
 	//garden.Templates["tag_template"] = tag_template
 
-	links_template, err := template.ParseFiles("ui/templates/partials/links.html")
+	links_template, err := template.ParseFiles("templates/partials/links.html")
 	if err != nil {
 		panic(err)
 	}
 	garden.Templates["links_template"] = links_template
 
 	post_template, err := template.ParseFiles(partials...)
-	post_template.ParseFiles("./ui/templates/single.html")
+	post_template.ParseFiles("./templates/single.html")
 	if err != nil {
 		panic(err)
 	}
@@ -255,7 +260,7 @@ func (garden *Garden) GenAssets() {
 	if err != nil {
 		panic(err)
 	}
-	home_template, err = home_template.ParseFiles("./ui/templates/index.html")
+	home_template, err = home_template.ParseFiles("./templates/index.html")
 	if err != nil {
 		panic(err)
 	}

@@ -10,7 +10,7 @@ func (app *Application) routes() *http.ServeMux {
 
 	mux := http.NewServeMux()
 
-	fs := http.FileServer(http.Dir("./ui/static/"))
+	fs := http.FileServer(http.Dir("./static/"))
 
 	mux.Handle("GET /static/", http.StripPrefix("/static", fs))
 

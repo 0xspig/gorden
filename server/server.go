@@ -29,7 +29,7 @@ func (app *Application) Init(dir string, renderDrafts bool) {
 
 	// TODO make content dir in config or something to search files in
 	// for now Im just going to hack in static
-	g.PopulateGardenFromDir("ui/content")
+	g.PopulateGardenFromDir("content")
 	g.ParseAllConnections()
 	g.GenAssets()
 
