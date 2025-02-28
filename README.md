@@ -13,9 +13,10 @@ Second - running the backend.
 ## Site Generation
 To create a new site navigate to an empty folder and run:
 
-``` gorden -init "Site Name" ```
+``` gorden -init ```
 
 This will populate the current working directory with the base files.
+Optionally you can add the -default flag to skip site.yaml configuration.
 
 ## Running the backend
 The backend can be installed as a systemd service on your server.
